@@ -1,0 +1,215 @@
+<template>
+<div>
+  <v-app-bar app color="yellow darken-1" dark>
+      <v-btn depressed class="transparent" to="/"><v-toolbar-title class="text-uppercase white--text">
+                <span class="font-weight-light">Sun</span>
+                <span>Shine</span>
+            </v-toolbar-title></v-btn>
+            <v-spacer></v-spacer>
+            <v-btn depressed class="transparent" to="/">Back to Home</v-btn>
+  </v-app-bar>
+
+<v-layout justify-center>
+<v-container id="admin" class="fill-height" fluid v-if="!submitted">
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="12">
+            <v-card class="elevation-12">
+              <v-toolbar color="black">
+                <v-toolbar-title class="white--text">Volunteer for Us</v-toolbar-title>
+                <div class="flex-grow-1"></div>
+              </v-toolbar>
+
+              <v-card-text>
+                <v-form>
+                    <v-text-field
+                  v-model="name"
+                    label="Full Name"
+                    name="name"
+                    :rules="nameRules"
+                    prepend-icon=""
+                    type="text"
+                    width="50px"
+                    required
+                  ></v-text-field>
+
+                   <v-select
+                    v-model="sex"
+                    :items="gender"
+                    :rules="[v => !!v || 'required']"
+                    label="Sex"
+                    required
+                    ></v-select>
+
+                  <v-select
+                    v-model="select"
+                    :items="city"
+                    :rules="[v => !!v || 'required']"
+                    label="Current City"
+                    required
+                    ></v-select>
+
+                    <v-text-field
+                  v-model="contact"
+                    label="Contact No."
+                    name="contact"
+                    :rules="contactRules"
+                    prepend-icon=""
+                    type="text"
+                    width="50px"
+                    required
+                  ></v-text-field>
+
+                    <v-text-field
+                  v-model="email"
+                    label="Email ID"
+                    name="email"
+                    :rules="emailRules"
+                    prepend-icon=""
+                    type="text"
+                    width="50px"
+                    required
+                  ></v-text-field>
+
+                  <v-select
+                    v-model="aoi"
+                    :items="areaofinterest"
+                    :rules="[v => !!v || 'required']"
+                    label="Area of Interest"
+                    required
+                    ></v-select>
+
+                    <v-select
+                    v-model="sc"
+                    :items="specialcapabilities"
+                    :rules="[v => !!v || 'required']"
+                    label="Special Capabilities"
+                    required
+                    ></v-select>
+
+                    <v-select
+                    v-model="available"
+                    :items="availability"
+                    :rules="[v => !!v || 'required']"
+                    label="Availability"
+                    required
+                    ></v-select>
+
+                  <v-file-input label="Upload Resume"></v-file-input>
+
+                  <v-checkbox
+                v-model="checkbox"
+                :rules="[v => !!v || 'You must agree to continue!']"
+                label="Yes! I would like to volunteer for Sunshine Foundation."
+                required
+                ></v-checkbox>
+                </v-form>
+              </v-card-text>
+
+              <div class="text-center">
+                <v-dialog v-model="dialog" width="500">
+                  <template v-slot:activator="{ on }">
+                    <v-btn color="red lighten-2" dark v-on="on">Register</v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline grey lighten-2" primary-title>Privacy Policy</v-card-title>
+                  <v-card-text>
+                    I agree that whatever I have filled here in my information is true.
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-actions>
+                  <div class="flex-grow-1"></div>
+                    <v-btn color="primary" text @click="dialog = false" :disabled="!valid" >I accept</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </div>
+
+            </v-card>
+          </v-col>
+        </v-row>
+</v-container>
+
+    <v-footer color="yellow darken-1" app>
+      <span class="white--text">&copy; (TE COMPUTER Webmasters-2019)</span>
+    </v-footer>
+
+  </v-layout>
+</div>
+</template>
+
+<script>
+export default {
+    data: () => ({
+      valid: false,
+      name: '',
+      nameRules: [
+        v => !!v || 'Name is required',
+        v => v.length <= 20 || 'Maximum 20 characters',
+      ],
+      sex: null,
+      gender: [
+        'Male',
+        'Female',
+        'others',
+      ],
+      select: null,
+      city: [
+          'Ahmedabad',
+          'Bangalore',
+          'Chennai',
+          'Delhi',
+          'Firozabad',
+          'Gwailor',
+          'Hyderabad',
+          'Jaipur',
+          'Kolkata',
+          'Lucknow',
+          'Mumbai',
+          'Noida',
+          'Pune',
+          'Raipur',
+          'Srinagar',
+      ],
+      contact:'',
+      contactRules: [
+        v => !!v || 'Contact No. is required',
+        v => v.length <= 10 || 'Maximum 10 digits ',
+      ],
+      email: '',
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+/.test(v) || 'E-mail must be valid',
+      ],
+      areaofinterest: [
+        'Education',
+        'Health and Nutrition',
+        'Fundraising',
+        'Campaigning',
+        'Humanitarian Response',
+      ],
+      specialcapabilities: [
+        'Teacher',
+        'Health Care Porfessional',
+        'Child Care Expert',
+        'Blogger',
+        'Fundraiser',
+        'Activist',
+      ],
+      availability: [
+        'Part-time',
+        'Full-time',
+      ],
+      uploadfile: null,
+      checkbox: false,
+      dialog: false,
+    }),
+};
+</script>
+
+<style>
+#admin{
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 100px;
+}
+</style>
