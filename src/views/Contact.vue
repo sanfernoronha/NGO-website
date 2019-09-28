@@ -1,7 +1,6 @@
 <template>
 <v-app>
   <v-app id="inspire">
-
     <v-app-bar app color="yellow darken-1" dark>
       <v-btn depressed class="transparent" to="/"><v-toolbar-title class="text-uppercase white--text">
                 <span class="font-weight-light">Sun</span>
@@ -84,24 +83,13 @@
 </template>
 
 <script>
-import LoginforStaff from '../components/LoginforStaff';
-
-
 export default {
-  data () {
-      return {
-        colors: [
-          'primary',
-          'secondary',
-          'yellow darken-2',
-          'red',
-          'orange',
-        ],
-        model: 0,
-      }
-    },
-  components: {
-    LoginforStaff,
+  data() {
+    return {
+      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
+      model: 0
+    };
   },
+  components: {}
 };
 </script>

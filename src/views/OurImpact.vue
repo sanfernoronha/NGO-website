@@ -33,38 +33,7 @@
     </div>
   </v-parallax>
 
-  <v-row>
-  <v-card class="mx-auto" max-width="400">
-    <v-img class="white--text" height="200px" src="\C:\Users\User\Desktop\ngo-manager-master\ngo-manager-master\ngo-project\src\assets/volunteer.png">
-      <v-card-title class="align-end fill-height black--text">VOLUNTEER Login</v-card-title>
-    </v-img>
-    <v-card-text>
-      <span class="text--primary">
-        <span>Help a needy and spread happiness</span>
-      </span>
-    </v-card-text>
 
-    <v-card-actions>
-      <v-btn to="/volunteerlogin" text color="orange">Volunteer Login</v-btn>
-    </v-card-actions>
-  </v-card>
-
-<v-card class="mx-auto" max-width="400">
-    <v-img class="white--text" height="200px" src="\C:\Users\User\Desktop\ngo-manager-master\ngo-manager-master\ngo-project\src\assets/staff.jpg">
-      <v-card-title class="align-end fill-height black--text">STAFF Login</v-card-title>
-    </v-img>
-
-    <v-card-text>
-      <span class="text--primary">
-        <span>Staff (Sunshine Foundation) </span>
-      </span>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-btn to="/stafflogin" text color="orange">Staff Login</v-btn>
-    </v-card-actions>
-  </v-card>
-  </v-row>
       <!--<v-carousel v-model="model">
       <v-carousel-item
         v-for="(color, i) in colors"
@@ -117,24 +86,13 @@
 </template>
 
 <script>
-import LoginforStaff from '../components/LoginforStaff';
-
-
 export default {
-  data () {
-      return {
-        colors: [
-          'primary',
-          'secondary',
-          'yellow darken-2',
-          'red',
-          'orange',
-        ],
-        model: 0,
-      }
-    },
-  components: {
-    LoginforStaff,
+  data() {
+    return {
+      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
+      model: 0
+    };
   },
+  components: {}
 };
 </script>

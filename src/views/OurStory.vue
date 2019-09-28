@@ -84,23 +84,13 @@
 </template>
 
 <script>
-import LoginforStaff from '../components/LoginforStaff';
-
 export default {
-  data () {
-      return {
-        colors: [
-          'primary',
-          'secondary',
-          'yellow darken-2',
-          'red',
-          'orange',
-        ],
-        model: 0,
-      }
-    },
-  components: {
-    LoginforStaff,
+  data() {
+    return {
+      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
+      model: 0
+    };
   },
+  components: {}
 };
 </script>

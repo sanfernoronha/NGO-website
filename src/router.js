@@ -1,82 +1,82 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
-import OurStory from './views/OurStory.vue'
-import OurImpact from './views/OurImpact.vue'
-import WhatWeDo from './views/WhatWeDo.vue'
-import JoinTheMovement from './views/JoinTheMovement.vue'
-import Donate from './views/Donate.vue'
-import Contact from './views/Contact.vue'
-import PrivacyPolicy from './views/PrivacyPolicy.vue'
-import faqs from './views/faqs.vue'
-import LoginforStaff from './components/LoginforStaff.vue'
-import LoginforVolunteer from './components/LoginforVolunteers.vue'
-import Register from './components/Register.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home.vue";
+import OurStory from "./views/OurStory.vue";
+import OurImpact from "./views/OurImpact.vue";
+import WhatWeDo from "./views/WhatWeDo.vue";
+import JoinTheMovement from "./views/JoinTheMovement.vue";
+import Donate from "./views/Donate.vue";
+import Contact from "./views/Contact.vue";
+import PrivacyPolicy from "./views/PrivacyPolicy.vue";
+import faqs from "./views/faqs.vue";
+import LoginforStaff from "./components/LoginforStaff.vue";
+import LoginforVolunteer from "./components/LoginforVolunteers.vue";
+import Register from "./components/Register.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
+    mode: "history",
     base: process.env.BASE_URL,
     routes: [{
-            path: '/',
-            name: 'home',
+            path: "/",
+            name: "home",
             component: Home
         },
         {
-            path: '/OurStory',
-            name: 'ourstory',
+            path: "/ourstory",
+            name: "ourstory",
             component: OurStory
         },
         {
-            path: '/WhatWeDo',
-            name: 'whatwedo',
+            path: "/whatwedo",
+            name: "whatwedo",
             component: WhatWeDo
         },
         {
-            path: '/OurImpact',
-            name: 'ourimpact',
+            path: "/ourimpact",
+            name: "ourimpact",
             component: OurImpact
         },
         {
-            path: '/JoinTheMovement',
-            name: 'jointhemovement',
+            path: "/joinThemovement",
+            name: "jointhemovement",
             component: JoinTheMovement
         },
         {
-            path: '/Donate',
-            name: 'donate',
+            path: "/donate",
+            name: "donate",
             component: Donate
         },
         {
-            path: '/Contact',
-            name: 'contact',
+            path: "/contact",
+            name: "contact",
             component: Contact
         },
         {
-            path: '/LoginforStaff',
-            name: 'loginforstaff',
+            path: "/loginforstaff",
+            name: "loginforstaff",
             component: LoginforStaff
         },
         {
-            path: '/LoginforVolunteers',
-            name: 'loginforvolunteers',
+            path: "/loginforvolunteers",
+            name: "loginforvolunteers",
             component: LoginforVolunteer
         },
         {
-            path: '/Register',
-            name: 'register',
+            path: "/register",
+            name: "register",
             component: Register
         },
         {
-            path: '/PrivacyPolicy',
-            name: 'privacypolicy',
+            path: "/privacypolicy",
+            name: "privacypolicy",
             component: PrivacyPolicy
         },
         {
-            path: '/faqs',
-            name: 'faqs',
+            path: "/faqs",
+            name: "faqs",
             component: faqs
-        },
+        }
     ]
-})
+});

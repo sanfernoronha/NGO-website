@@ -139,75 +139,68 @@
 
 <script>
 export default {
-    data: () => ({
-      valid: false,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => v.length <= 20 || 'Maximum 20 characters',
-      ],
-      sex: null,
-      gender: [
-        'Male',
-        'Female',
-        'others',
-      ],
-      select: null,
-      city: [
-          'Ahmedabad',
-          'Bangalore',
-          'Chennai',
-          'Delhi',
-          'Firozabad',
-          'Gwailor',
-          'Hyderabad',
-          'Jaipur',
-          'Kolkata',
-          'Lucknow',
-          'Mumbai',
-          'Noida',
-          'Pune',
-          'Raipur',
-          'Srinagar',
-      ],
-      contact:'',
-      contactRules: [
-        v => !!v || 'Contact No. is required',
-        v => v.length <= 10 || 'Maximum 10 digits ',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+/.test(v) || 'E-mail must be valid',
-      ],
-      areaofinterest: [
-        'Education',
-        'Health and Nutrition',
-        'Fundraising',
-        'Campaigning',
-        'Humanitarian Response',
-      ],
-      specialcapabilities: [
-        'Teacher',
-        'Health Care Porfessional',
-        'Child Care Expert',
-        'Blogger',
-        'Fundraiser',
-        'Activist',
-      ],
-      availability: [
-        'Part-time',
-        'Full-time',
-      ],
-      uploadfile: null,
-      checkbox: false,
-      dialog: false,
-    }),
+  data: () => ({
+    valid: false,
+    name: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => v.length <= 20 || "Maximum 20 characters"
+    ],
+    sex: null,
+    gender: ["Male", "Female", "others"],
+    select: null,
+    city: [
+      "Ahmedabad",
+      "Bangalore",
+      "Chennai",
+      "Delhi",
+      "Firozabad",
+      "Gwailor",
+      "Hyderabad",
+      "Jaipur",
+      "Kolkata",
+      "Lucknow",
+      "Mumbai",
+      "Noida",
+      "Pune",
+      "Raipur",
+      "Srinagar"
+    ],
+    contact: "",
+    contactRules: [
+      v => !!v || "Contact No. is required",
+      v => v.length <= 10 || "Maximum 10 digits "
+    ],
+    email: "",
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+/.test(v) || "E-mail must be valid"
+    ],
+    areaofinterest: [
+      "Education",
+      "Health and Nutrition",
+      "Fundraising",
+      "Campaigning",
+      "Humanitarian Response"
+    ],
+    specialcapabilities: [
+      "Teacher",
+      "Health Care Porfessional",
+      "Child Care Expert",
+      "Blogger",
+      "Fundraiser",
+      "Activist"
+    ],
+    availability: ["Part-time", "Full-time"],
+    uploadfile: null,
+    checkbox: false,
+    dialog: false
+  })
 };
 </script>
 
 <style>
-#admin{
+#admin {
   margin-left: 30%;
   margin-right: 30%;
   margin-top: 100px;

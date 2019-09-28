@@ -1,25 +1,28 @@
 <template>
   <v-app>
-    <router-view>
 
-    </router-view>
+    <v-content>
+      <router-view>
+        <Home/>
+      </router-view>
+    </v-content>
+
   </v-app>
 </template>
 
 <script>
-import LoginforStaff from './components/LoginforStaff';
-import LoginforVolunteers from './components/LoginforVolunteers';
-import Register from './components/Register';
+import Home from "./views/Home";
+// import Register from "./components/Register";
+// import LoginforVolunteers from "./components/LoginforVolunteers";
+// import LoginforStaff from "./components/LoginforStaff";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    LoginforStaff,
-    LoginforVolunteers,
-    Register,
+    Home
   },
   data: () => ({
     //
-  }),
+  })
 };
 </script>
