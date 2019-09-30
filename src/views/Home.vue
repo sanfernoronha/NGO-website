@@ -10,6 +10,9 @@
             <div class="flex-grow-1"></div>
       <v-toolbar-items>
         <v-btn to="/" text>Home</v-btn>
+
+
+
         <v-btn to="/ourstory" text>Our Story</v-btn>
         <v-btn to="/whatwedo" text>What we do?</v-btn>
         <v-btn to="/ourimpact" text>Our Impact</v-btn>
@@ -35,7 +38,7 @@
 
   <v-row>
   <v-card class="mx-auto" id="card" max-width="400">
-    <v-img class="white--text" height="200px" src="\C:\Users\User\Desktop\ngo-manager-master\ngo-manager-master\ngo-project\src\assets/volunteer.png">
+    <v-img class="white--text" height="200px" src="@/assets/volunteer.png">
       <v-card-title class="align-end fill-height black--text">VOLUNTEER Login</v-card-title>
     </v-img>
     <v-card-text>
@@ -50,7 +53,7 @@
   </v-card>
 
 <v-card class="mx-auto" id="card" max-width="400">
-    <v-img class="white--text" height="200px" src="\C:\Users\User\Desktop\ngo-manager-master\ngo-manager-master\ngo-project\src\assets/staff.jpg">
+    <v-img class="white--text" height="200px" src="@/assets/staff.jpg">
       <v-card-title class="align-end fill-height black--text">STAFF Login</v-card-title>
     </v-img>
 
@@ -118,6 +121,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      ourstory: ["Beginnings", "People"]
+    };
+  },
   components: {}
 };
 </script>

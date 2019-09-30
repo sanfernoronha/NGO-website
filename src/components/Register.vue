@@ -94,7 +94,7 @@
                     required
                     ></v-select>
 
-                  <v-file-input label="Upload Resume"></v-file-input>
+                  <!-- <v-file-input label="Upload Resume"></v-file-input> -->
 
                   <v-checkbox
                 v-model="checkbox"
@@ -118,7 +118,7 @@
                   <v-divider></v-divider>
                   <v-card-actions>
                   <div class="flex-grow-1"></div>
-                    <v-btn color="primary" text @click="dialog = false" :disabled="!valid" >I accept</v-btn>
+                    <v-btn color="primary" text v-on:click="register" @click="dialog = false" >I accept</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -138,65 +138,111 @@
 </template>
 
 <script>
+// import db from './firebaseinit.js';
+
 export default {
-  data: () => ({
-    valid: false,
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => v.length <= 20 || "Maximum 20 characters"
-    ],
-    sex: null,
-    gender: ["Male", "Female", "others"],
-    select: null,
-    city: [
-      "Ahmedabad",
-      "Bangalore",
-      "Chennai",
-      "Delhi",
-      "Firozabad",
-      "Gwailor",
-      "Hyderabad",
-      "Jaipur",
-      "Kolkata",
-      "Lucknow",
-      "Mumbai",
-      "Noida",
-      "Pune",
-      "Raipur",
-      "Srinagar"
-    ],
-    contact: "",
-    contactRules: [
-      v => !!v || "Contact No. is required",
-      v => v.length <= 10 || "Maximum 10 digits "
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+/.test(v) || "E-mail must be valid"
-    ],
-    areaofinterest: [
-      "Education",
-      "Health and Nutrition",
-      "Fundraising",
-      "Campaigning",
-      "Humanitarian Response"
-    ],
-    specialcapabilities: [
-      "Teacher",
-      "Health Care Porfessional",
-      "Child Care Expert",
-      "Blogger",
-      "Fundraiser",
-      "Activist"
-    ],
-    availability: ["Part-time", "Full-time"],
-    uploadfile: null,
-    checkbox: false,
-    dialog: false
-  })
+  name: "register",
+  data() {
+    return {
+      valid: false,
+      name: "",
+      nameRules: [
+        v => !!v || "Name is required",
+        v => v.length <= 20 || "Maximum 20 characters"
+      ],
+      sex: null,
+      gender: ["Male", "Female", "others"],
+      select: null,
+      city: [
+        "Ahmedabad",
+        "Bangalore",
+        "Chennai",
+        "Delhi",
+        "Firozabad",
+        "Gwailor",
+        "Hyderabad",
+        "Jaipur",
+        "Kolkata",
+        "Lucknow",
+        "Mumbai",
+        "Noida",
+        "Pune",
+        "Raipur",
+        "Srinagar"
+      ],
+      contact: "",
+      contactRules: [
+        v => !!v || "Contact No. is required",
+        v => v.length <= 10 || "Maximum 10 digits "
+      ],
+      email: "",
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+/.test(v) || "E-mail must be valid"
+      ],
+      areaofinterest: [
+        "Education",
+        "Health and Nutrition",
+        "Fundraising",
+        "Campaigning",
+        "Humanitarian Response"
+      ],
+      specialcapabilities: [
+        "Teacher",
+        "Health Care Porfessional",
+        "Child Care Expert",
+        "Blogger",
+        "Fundraiser",
+        "Activist"
+      ],
+      availability: ["Part-time", "Full-time"],
+      uploadfile: null,
+      checkbox: false,
+      dialog: false
+    };
+  },
+  // created () {
+  //   db.collection('volunteer').get().
+  //   then(querySnapshot => {
+  //     querySnapshot.forEach(doc => {
+  //       console.log(doc.data());
+  //       const data = {
+  //         'id':doc.id;
+  //         'name': doc.data().name,
+  //         'sex': doc.data().sex,
+  //         'city': doc.data().city,
+  //         'contact': doc.data().contact,
+  //         'email': doc.data().email,
+  //         'areaofinterest': doc.data().areaofinterest,
+  //         'specialcapabilities': doc.data().specialcapabilities,
+  //         'availibility': doc.data().availibility,
+  //       }
+  //       this.volunteer.push(data)
+  //     })
+  //   })
+  // }
+  methods: {}
 };
+//   register: function(e) {
+//     firebase
+//       .auth()
+//       .registerVolunteer(
+//         this.name,
+//         this.sex,
+//         this.city,
+//         this.contact,
+//         this.email,
+//         this.areaofinterest,
+//         this.specialcapabilities,
+//         this.availability
+//       )
+//       .then(volunteer => {
+//         alert(`Account created for ${volunteer.name}`);
+//         this.$router.push('/');
+//       };
+//     e.preventDefault();
+//   }
+// }
 </script>
 
 <style>
