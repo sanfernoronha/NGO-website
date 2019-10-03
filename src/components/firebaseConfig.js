@@ -1,10 +1,10 @@
 export default {
-    apiKey: "AIzaSyBoVwktsaWk_kTi1JYC4YU2OdasZw88GbA",
-    authDomain: "ngo-website-b7f1e.firebaseapp.com",
-    databaseURL: "https://ngo-website-b7f1e.firebaseio.com",
-    projectId: "ngo-website-b7f1e",
-    storageBucket: "ngo-website-b7f1e.appspot.com",
-    messagingSenderId: "579396610873",
-    appId: "1:579396610873:web:59e6cf8228e3bb320196e8",
-    measurementId: "G-ZKSTJBSXEG"
-};
+    apiKey: "AIzaSyCpY4JejF2RKvGPc20PzgC8jt3DiziSRQk",
+    authDomain: "ngo-manage.firebaseapp.com",
+    databaseURL: "https://ngo-manage.firebaseio.com",
+    projectId: "ngo-manage",
+    storageBucket: "ngo-manage.appspot.com",
+    messagingSenderId: "937444941673",
+    appId: "1:937444941673:web:6ae58d6f1a4f723153a7f8",
+    measurementId: "G-MRPV9D6HKZ"
+}

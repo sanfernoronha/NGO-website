@@ -12,6 +12,8 @@ import faqs from "./views/faqs.vue";
 import LoginforStaff from "./components/LoginforStaff.vue";
 import LoginforVolunteer from "./components/LoginforVolunteers.vue";
 import Register from "./components/Register.vue";
+import Dashboard from "./views/Dashboard.vue"
+import DashboardStaff from "./views/Dashboard_Staff.vue"
 
 Vue.use(Router);
 
@@ -77,6 +79,16 @@ export default new Router({
             path: "/faqs",
             name: "faqs",
             component: faqs
+        },
+        {
+            path: "/dashboard",
+            name: "dashboard",
+            component: Dashboard
+        },
+        {
+            path: "/dashboardStaff",
+            name: "dashboardStaff",
+            component: DashboardStaff
         }
     ]
 });
