@@ -37,7 +37,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item-title>Jane Smith</v-list-item-title>
+                        <v-list-item-title>{{name}}</v-list-item-title>
                         <v-list-item-subtitle>Logged In</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -61,12 +61,22 @@
 
                   <v-divider></v-divider>
 
-                  <v-list dense></v-list>
+                  <v-list dense>
+                    <v-list-item @click="logout">
+                      <v-list-item-icon>
+                        <v-icon>mdi-exit-to-app</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Logout</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
                 </v-navigation-drawer>
 
                 <v-container style="height: auto;">
                   <v-row>
-                    <v-col cols="12" offset-lg="6">
+                    <v-col cols="12" offset-lg="3">
                       <profile-card v-if="sidebar[0].show"></profile-card>
                       <my-events v-else-if="sidebar[1].show"></my-events>
                       <my-volunteers v-else-if="sidebar[2].show"></my-volunteers>
@@ -90,6 +100,8 @@
 </template>
 
 <script>
+import db from "../components/firebaseInit";
+import firebase from "firebase";
 import ProfileCard from "../components/profile_card_staff";
 import MyEvents from "../components/my_list";
 import MyVolunteers from "../components/my_volunteers";
@@ -97,12 +109,16 @@ import Create from "../components/create_event";
 export default {
   data() {
     return {
+      name: "",
+      email: "",
       sidebar: [
         { title: "Profile", icon: "mdi-account-badge-horizontal", show: true },
         { title: "My Events", icon: "mdi-playlist-star", show: false },
         { title: "My Volunteers", icon: "mdi-account-group", show: false },
         { title: "Create Event", icon: "mdi-calendar-plus", show: false }
-      ]
+      ],
+      isLoggedIn: false,
+      currentUser: false
     };
   },
   components: {
@@ -112,6 +128,14 @@ export default {
     "create-event": Create
   },
   methods: {
+    logout: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push("/loginforstaff/");
+        });
+    },
     changeBoolean(index) {
       if (index == 0) {
         this.sidebar[0].show = true;
@@ -134,7 +158,32 @@ export default {
         this.sidebar[2].show = false;
         this.sidebar[3].show = true;
       }
+    },
+    fetchData() {
+      db.collection("staff_data")
+        .where("Email", "==", this.$route.params.staffEmail)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            this.name = doc.data().FullName;
+          });
+        });
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    db.collection("staff_data")
+      .where("Email", "==", to.params.staffEmail)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          next(vm => {
+            vm.name = doc.data().FullName;
+          });
+        });
+      });
+  },
+  watch: {
+    $route: "fetchData"
   }
 };
 </script>

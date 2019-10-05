@@ -56,12 +56,12 @@ export default new Router({
             component: Contact
         },
         {
-            path: "/loginforstaff",
+            path: "/loginforstaff/",
             name: "loginforstaff",
             component: LoginforStaff
         },
         {
-            path: "/loginforvolunteers",
+            path: "/loginforvolunteers/",
             name: "loginforvolunteers",
             component: LoginforVolunteer
         },
@@ -81,12 +81,12 @@ export default new Router({
             component: faqs
         },
         {
-            path: "/dashboard",
+            path: "/dashboard/:userEmail",
             name: "dashboard",
             component: Dashboard
         },
         {
-            path: "/dashboardStaff",
+            path: "/dashboardStaff/:staffEmail",
             name: "dashboardStaff",
             component: DashboardStaff
         }

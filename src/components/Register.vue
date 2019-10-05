@@ -22,7 +22,7 @@
               </v-toolbar>
 
               <v-card-text>
-                <v-form>
+                <v-form @submit.prevent="saveVolunteer">
                   <v-text-field
                     v-model="name"
                     label="Full Name"
@@ -43,7 +43,7 @@
                   ></v-select>
 
                   <v-select
-                    v-model="select"
+                    v-model="ccity"
                     :items="city"
                     :rules="[v => !!v || 'required']"
                     label="Current City"
@@ -69,6 +69,15 @@
                     prepend-icon
                     type="text"
                     width="50px"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="password"
+                    label="Password"
+                    name="password"
+                    :rules="passwordRules"
+                    prepend-icon
+                    type="password"
                     required
                   ></v-text-field>
 
@@ -104,30 +113,12 @@
                     label="Yes! I would like to volunteer for Sunshine Foundation."
                     required
                   ></v-checkbox>
+
+                  <div class="text-center">
+                    <v-btn color="red lighten-2 my-3" dark type="submit">Register</v-btn>
+                  </div>
                 </v-form>
               </v-card-text>
-
-              <div class="text-center">
-                <v-dialog v-model="dialog" width="500">
-                  <template v-slot:activator="{ on }">
-                    <v-btn color="red lighten-2 my-3" dark v-on="on">Register</v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title class="headline grey lighten-2" primary-title>Privacy Policy</v-card-title>
-                    <v-card-text>I agree that whatever I have filled here in my information is true.</v-card-text>
-                    <v-divider></v-divider>
-                    <v-card-actions>
-                      <div class="flex-grow-1"></div>
-                      <v-btn
-                        color="primary my-4"
-                        text
-                        v-on:click="register"
-                        @click="dialog = false"
-                      >I accept</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -141,7 +132,8 @@
 </template>
 
 <script>
-// import db from './firebaseinit.js';
+import db from "./firebaseInit";
+import firebase from "firebase";
 
 export default {
   name: "register",
@@ -155,7 +147,8 @@ export default {
       ],
       sex: null,
       gender: ["Male", "Female", "others"],
-      select: null,
+      ccity: "",
+      aoi: "",
       city: [
         "Ahmedabad",
         "Bangalore",
@@ -179,6 +172,11 @@ export default {
         v => v.length <= 10 || "Maximum 10 digits "
       ],
       email: "",
+      password: "",
+      passwordRules: [
+        v => !!v || "Password is required",
+        v => v.length <= 8 || "Password is incorrect"
+      ],
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
@@ -198,10 +196,14 @@ export default {
         "Fundraiser",
         "Activist"
       ],
+      sc: "",
       availability: ["Part-time", "Full-time"],
-      uploadfile: null,
+      // uploadfile: null,
       checkbox: false,
-      dialog: false
+      dialog: false,
+      available: "",
+      volunteers_email: [],
+      staff_email: []
     };
   },
   // created () {
@@ -224,28 +226,80 @@ export default {
   //     })
   //   })
   // }
-  methods: {}
+  created() {
+    db.collection("volunteers_data")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const email = doc.data().Email;
+          this.volunteers_email.push(email);
+        });
+      });
+
+    db.collection("staff_data")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const staff_email = doc.data().Email;
+          this.staff_email.push(staff_email);
+        });
+      });
+  },
+  methods: {
+    saveVolunteer: function(e) {
+      let flag = false;
+      for (let index = 0; index < this.volunteers_email.length; index++) {
+        if (this.volunteers_email[index] == this.email) {
+          flag = true;
+        }
+      }
+      for (let index = 0; index < this.staff_email.length; index++) {
+        if (this.staff_email[index] == this.email) {
+          flag = true;
+        }
+      }
+
+      if (flag == true) {
+        window.alert("Account exists on this email");
+        return false;
+      } else if (flag == false) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then(
+            user => {
+              alert(`Account created for ${user.email}`);
+              db.collection("volunteers_data")
+                .add({
+                  Availability: this.available,
+                  City: this.ccity,
+                  Contact: this.contact,
+                  Email: this.email,
+                  FullName: this.name,
+                  Interest: this.aoi,
+                  Sex: this.sex,
+                  Special: this.sc,
+                  Password: this.password
+                })
+                .then(docRef => {
+                  this.$router.push({
+                    name: "dashboard",
+                    params: { userEmail: this.email }
+                  });
+                })
+                .catch(error => {
+                  console.error("error adding ", error);
+                });
+            },
+            err => {
+              alert(err.message);
+            }
+          );
+      }
+      e.preventDefault();
+    }
+  }
 };
-//   register: function(e) {
-//     firebase
-//       .auth()
-//       .registerVolunteer(
-//         this.name,
-//         this.sex,
-//         this.city,
-//         this.contact,
-//         this.email,
-//         this.areaofinterest,
-//         this.specialcapabilities,
-//         this.availability
-//       )
-//       .then(volunteer => {
-//         alert(`Account created for ${volunteer.name}`);
-//         this.$router.push('/');
-//       };
-//     e.preventDefault();
-//   }
-// }
 </script>
 
 <style>

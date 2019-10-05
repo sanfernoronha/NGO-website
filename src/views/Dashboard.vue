@@ -37,7 +37,7 @@
                       </v-list-item-avatar>
 
                       <v-list-item-content>
-                        <v-list-item-title>Jane Smith</v-list-item-title>
+                        <v-list-item-title>{{name}}</v-list-item-title>
                         <v-list-item-subtitle>Logged In</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
@@ -89,12 +89,15 @@
 </template>
 
 <script>
+import db from "../components/firebaseInit";
 import ProfileCard from "../components/profile_card";
 import CompletedList from "../components/completed_list";
 import OngoingList from "../components/ongoing_list";
 export default {
   data() {
     return {
+      name: "",
+      email: "",
       sidebar: [
         { title: "Profile", icon: "mdi-account-badge-horizontal", show: true },
         { title: "Completed", icon: "mdi-calendar-check-outline", show: false },
@@ -122,7 +125,32 @@ export default {
         this.sidebar[1].show = false;
         this.sidebar[2].show = true;
       }
+    },
+    fetchData() {
+      db.collection("volunteers_data")
+        .where("Email", "==", this.$route.params.userEmail)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            this.name = doc.data().FullName;
+          });
+        });
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    db.collection("volunteers_data")
+      .where("Email", "==", to.params.userEmail)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          next(vm => {
+            vm.name = doc.data().FullName;
+          });
+        });
+      });
+  },
+  watch: {
+    $route: "fetchData"
   }
 };
 </script>
