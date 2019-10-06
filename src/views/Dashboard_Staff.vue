@@ -33,12 +33,15 @@
                   <template v-slot:prepend>
                     <v-list-item two-line>
                       <v-list-item-avatar>
-                        <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+                        <img
+                          src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                        />
                       </v-list-item-avatar>
 
                       <v-list-item-content>
                         <v-list-item-title>{{name}}</v-list-item-title>
-                        <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+                        <v-list-item-subtitle v-show="isLoggedIn" class="success--text">Logged In</v-list-item-subtitle>
+                        <v-list-item-subtitle v-show="!isLoggedIn" class="error--text">Logged In</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
                   </template>
@@ -126,6 +129,12 @@ export default {
     "my-events": MyEvents,
     "my-volunteers": MyVolunteers,
     "create-event": Create
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
   },
   methods: {
     logout: function() {

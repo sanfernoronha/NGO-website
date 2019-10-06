@@ -75,9 +75,11 @@
                 </div>
               </v-row>
             </v-list-item>-->
-            <v-btn fab dark x-small color="teal" class="mr-9">
+
+            <v-btn fab dark x-small color="teal" class="mr-9" @click="pushToEdit(item.eventID)">
               <v-icon dark>mdi-format-list-bulleted-square</v-icon>
             </v-btn>
+
             <v-btn fab dark x-small color="success" class="mr-9">
               <v-icon dark>mdi-check-circle</v-icon>
             </v-btn>
@@ -101,26 +103,35 @@ export default {
       keywords: []
     };
   },
-  created() {
-    db.collection("events")
-      .where("Staff_Email", "==", this.$route.params.staffEmail)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const data = {
-            description: doc.data().Description,
-            endDate: doc.data().End_Date,
-            eventID: doc.data().Event_ID,
-            imageURL: doc.data().Image_URL,
-            keywords: doc.data().Keywords,
-            location: doc.data().Location,
-            startDate: doc.data().Start_Date,
-            title: doc.data().Title
-          };
-          this.volunteering.push(data);
-        });
+  methods: {
+    pushToEdit(id) {
+      console.log(id);
+      this.$router.push({
+        name: "edit-event"
       });
-  }
+    }
+  },
+  computed: {}
+  // created() {
+  //   db.collection("events")
+  //     .where("Staff_Email", "==", this.$route.params.staffEmail)
+  //     .get()
+  //     .then(querySnapshot => {
+  //       querySnapshot.forEach(doc => {
+  //         const data = {
+  //           description: doc.data().Description,
+  //           endDate: doc.data().End_Date,
+  //           eventID: doc.data().Event_ID,
+  //           imageURL: doc.data().Image_URL,
+  //           keywords: doc.data().Keywords,
+  //           location: doc.data().Location,
+  //           startDate: doc.data().Start_Date,
+  //           title: doc.data().Title
+  //         };
+  //         this.volunteering.push(data);
+  //       });
+  //     });
+  // }
 };
 </script>
 

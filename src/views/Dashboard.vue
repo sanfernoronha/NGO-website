@@ -33,7 +33,9 @@
                   <template v-slot:prepend>
                     <v-list-item two-line>
                       <v-list-item-avatar>
-                        <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+                        <img
+                          src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                        />
                       </v-list-item-avatar>
 
                       <v-list-item-content>
@@ -60,6 +62,17 @@
                   </v-list>
 
                   <v-divider></v-divider>
+                  <v-list dense>
+                    <v-list-item @click="logout">
+                      <v-list-item-icon>
+                        <v-icon>mdi-exit-to-app</v-icon>
+                      </v-list-item-icon>
+
+                      <v-list-item-content>
+                        <v-list-item-title>Logout</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
 
                   <v-list dense></v-list>
                 </v-navigation-drawer>
@@ -89,6 +102,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 import db from "../components/firebaseInit";
 import ProfileCard from "../components/profile_card";
 import CompletedList from "../components/completed_list";
@@ -102,7 +116,9 @@ export default {
         { title: "Profile", icon: "mdi-account-badge-horizontal", show: true },
         { title: "Completed", icon: "mdi-calendar-check-outline", show: false },
         { title: "On-going", icon: "mdi-calendar-clock", show: false }
-      ]
+      ],
+      isLoggedIn: false,
+      currentUser: false
     };
   },
   components: {
@@ -111,6 +127,14 @@ export default {
     "ongoing-list": OngoingList
   },
   methods: {
+    logout: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push("/loginforvolunteers/");
+        });
+    },
     changeBoolean(index) {
       if (index == 0) {
         this.sidebar[0].show = true;
