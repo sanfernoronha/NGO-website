@@ -22,8 +22,7 @@ Vue.use(Router);
 let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "home",
       component: Home
@@ -53,11 +52,7 @@ let router = new Router({
       name: "donate",
       component: Donate
     },
-    {
-      path: "/editThis",
-      name: "Edit",
-      component: Edit
-    },
+
     {
       path: "/contact",
       name: "contact",
@@ -100,6 +95,14 @@ let router = new Router({
       path: "/dashboardStaff/:staffEmail",
       name: "dashboardStaff",
       component: DashboardStaff,
+      meta: {
+        requiresStaffAuth: true
+      }
+    },
+    {
+      path: "/edit/:eventID",
+      name: "Edit",
+      component: Edit,
       meta: {
         requiresStaffAuth: true
       }

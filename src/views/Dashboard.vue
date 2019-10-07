@@ -83,6 +83,7 @@
                       <profile-card v-if="sidebar[0].show"></profile-card>
                       <completed-list v-else-if="sidebar[1].show"></completed-list>
                       <ongoing-list v-else-if="sidebar[2].show"></ongoing-list>
+                      <global-list v-else-if="sidebar[3].show"></global-list>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -107,6 +108,7 @@ import db from "../components/firebaseInit";
 import ProfileCard from "../components/profile_card";
 import CompletedList from "../components/completed_list";
 import OngoingList from "../components/ongoing_list";
+import Global from "../components/global_list";
 export default {
   data() {
     return {
@@ -115,7 +117,8 @@ export default {
       sidebar: [
         { title: "Profile", icon: "mdi-account-badge-horizontal", show: true },
         { title: "Completed", icon: "mdi-calendar-check-outline", show: false },
-        { title: "On-going", icon: "mdi-calendar-clock", show: false }
+        { title: "On-going", icon: "mdi-calendar-clock", show: false },
+        { title: "All Events", icon: "mdi-calendar-today", show: false }
       ],
       isLoggedIn: false,
       currentUser: false
@@ -124,7 +127,8 @@ export default {
   components: {
     "profile-card": ProfileCard,
     "completed-list": CompletedList,
-    "ongoing-list": OngoingList
+    "ongoing-list": OngoingList,
+    "global-list": Global
   },
   methods: {
     logout: function() {
@@ -140,14 +144,22 @@ export default {
         this.sidebar[0].show = true;
         this.sidebar[1].show = false;
         this.sidebar[2].show = false;
+        this.sidebar[3].show = false;
       } else if (index == 1) {
         this.sidebar[0].show = false;
         this.sidebar[1].show = true;
         this.sidebar[2].show = false;
+        this.sidebar[3].show = false;
       } else if (index == 2) {
         this.sidebar[0].show = false;
         this.sidebar[1].show = false;
         this.sidebar[2].show = true;
+        this.sidebar[3].show = false;
+      } else if (index == 3) {
+        this.sidebar[0].show = false;
+        this.sidebar[1].show = false;
+        this.sidebar[2].show = false;
+        this.sidebar[3].show = true;
       }
     },
     fetchData() {

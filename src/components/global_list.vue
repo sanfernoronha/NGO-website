@@ -76,10 +76,6 @@
               </v-row>
             </v-list-item>-->
 
-            <v-btn fab dark x-small color="teal" class="mr-9" @click="pushToEdit(item.eventID)">
-              <v-icon dark>mdi-format-paint</v-icon>
-            </v-btn>
-
             <v-btn fab dark x-small color="success" class="mr-9">
               <v-icon dark>mdi-check-circle</v-icon>
             </v-btn>
@@ -96,25 +92,15 @@
 <script>
 import db from "../components/firebaseInit";
 export default {
-  name: "MyEventsStaff",
+  name: "Global",
   data() {
     return {
       volunteering: [],
       keywords: []
     };
   },
-  methods: {
-    pushToEdit(id) {
-      this.$router.push({
-        name: "Edit",
-        params: { eventID: id }
-      });
-    }
-  },
-  computed: {},
   created() {
     db.collection("events")
-      .where("Staff_Email", "==", this.$route.params.staffEmail)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -137,7 +123,7 @@ export default {
 
 <style scoped>
 #my_container {
-  margin-left: -2%;
+  margin-left: -27%;
 }
 #my_card {
   margin-right: 50px;
