@@ -64,22 +64,22 @@
 export default {
   data: () => ({
     valid: false,
-    username: '',
+    username: "",
     usernameRules: [
-      v => !!v || 'Username is required',
-      v => v.length = 4 || 'Enter valid username',
+      v => !!v || "Username is required",
+      v => (v.length = 4 || "Enter valid username")
     ],
-    password: '',
+    password: "",
     passwordRules: [
-      v => !!v || 'Password is required',
-      v => v.length <= 8 || 'Password is incorrect',
-    ],
+      v => !!v || "Password is required",
+      v => v.length <= 8 || "Password is incorrect"
+    ]
   })
 };
 </script>
 
 <style>
-#admin{
+#admin {
   margin-left: 30%;
   margin-right: 30%;
   margin-top: 100px;

@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import OurStory from "./views/OurStory.vue";
 import OurImpact from "./views/OurImpact.vue";
 import WhatWeDo from "./views/WhatWeDo.vue";
 import JoinTheMovement from "./views/JoinTheMovement.vue";
@@ -12,8 +11,8 @@ import faqs from "./views/faqs.vue";
 import LoginforStaff from "./components/LoginforStaff.vue";
 import LoginforVolunteer from "./components/LoginforVolunteers.vue";
 import Register from "./components/Register.vue";
-import Dashboard from "./views/Dashboard.vue"
-import DashboardStaff from "./views/Dashboard_Staff.vue"
+import Success from "./components/success.vue";
+import Profile from "./components/profile.vue"
 
 Vue.use(Router);
 
@@ -24,11 +23,6 @@ export default new Router({
             path: "/",
             name: "home",
             component: Home
-        },
-        {
-            path: "/ourstory",
-            name: "ourstory",
-            component: OurStory
         },
         {
             path: "/whatwedo",
@@ -81,14 +75,14 @@ export default new Router({
             component: faqs
         },
         {
-            path: "/dashboard",
-            name: "dashboard",
-            component: Dashboard
+            path: "/success",
+            name: "success",
+            component: Success
         },
         {
-            path: "/dashboardStaff",
-            name: "dashboardStaff",
-            component: DashboardStaff
+            path: "/profile",
+            name: "profile",
+            component: Profile
         }
     ]
 });
