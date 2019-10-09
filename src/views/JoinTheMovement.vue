@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-app id="inspire">
-      <v-app-bar app color="yellow darken-1" dark>
-        <v-btn depressed class="transparent" to="/">
-          <v-toolbar-title class="text-uppercase white--text">
+      <v-app-bar app color="black" dark>
+        <v-img :src="require('@/assets/sun.png')" height="20px" max-width="50px"></v-img>
+        <v-btn transparent class="transparent" to="/">
+          <v-toolbar-title class="text-uppercase yellow--text">
             <span class="font-weight-light">Sun</span>
             <span>Shine</span>
           </v-toolbar-title>
@@ -11,79 +12,130 @@
         <v-spacer></v-spacer>
         <div class="flex-grow-1"></div>
         <v-toolbar-items>
-          <v-btn to="/" text>Home</v-btn>
-          <v-overflow-btn
-            color="yellow darken-1"
-            to="/ourstory"
-            class="my-2"
-            :items="stories"
-            label="Our Stories"
-            target="#dropdown-example"
-          ></v-overflow-btn>
-          <v-btn to="/whatwedo" text>What we do?</v-btn>
-          <v-btn to="/ourimpact" text>Our Impact</v-btn>
-          <v-btn to="/jointhemovement" text>Join the Movement</v-btn>
-          <v-btn to="/donate" text>Donate</v-btn>
+          <v-btn color="yellow" to="/whatwedo" text>What we do?</v-btn>
+          <v-btn color="yellow" to="/ourimpact" text>Our Impact</v-btn>
+          <v-btn color="yellow" to="/jointhemovement" text>Join the Movement</v-btn>
+          <v-btn color="yellow" to="/donate" text>Donate</v-btn>
         </v-toolbar-items>
       </v-app-bar>
 
       <v-content>
-        <v-parallax dark src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg">
-          <div id="heading">
-            <v-col align="center" justify="center">
-              <v-avatar>
-                <v-img class="white--text" src="@/assets/sunshine.png"></v-img>
-              </v-avatar>
-              <h1 class="display-3 font-weight-thin mb-4">Sunshine Foundation</h1>
-              <h4 class="subheading">Be a part of our Community!</h4>
-              <v-btn to="/Register" class="text-center" color="transparent" dark large>Join NOW!</v-btn>
-            </v-col>
-          </div>
-        </v-parallax>
-        <!--<v-carousel v-model="model">
-      <v-carousel-item
-        v-for="(color, i) in colors"
-        :key="color"
+        <!-- <v-carousel id="slide"
+    cycle
+    height="550px"
+    hide-delimiter-background
+    show-arrows-on-hover
+  >
+    <v-carousel-item
+      v-for="(slide, i) in slides"
+      :key="i"
+    >
+      <v-sheet
+        :src="src[i]"
+        height="100%"
       >
-        <v-sheet
-          :color="color"
-          height="100%"
-          tile
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
-            <div class="display-3">Slide {{ i + 1 }}</div>
-          </v-row>
-        </v-sheet>
-      </v-carousel-item>
+          <div class="display-3">{{ slide }}</div>
+        </v-row>
+      </v-sheet>
+    </v-carousel-item>
         </v-carousel>-->
+
+        <v-row align="center" justify="center">
+          <v-img
+            id="whatwedoback"
+            src="@/assets/volunteerwoman.jpg"
+            aspect-ratio="1"
+            class="grey lighten-2"
+            max-width="1350"
+            max-height="550"
+          >
+            <v-row align="end" class="lightbox white--text pa-2 fill-height">
+              <v-col>
+                <div class="heading display-2 font-weight-black text-center">GET INVOLVED</div>
+              </v-col>
+            </v-row>
+          </v-img>
+        </v-row>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="text-center">
+          <p class="headline">
+            You can play an integral role in growing this movement and redefining the education system in our country.
+            <br />Here is how you can get involved:
+          </p>
+        </div>
+        <br />
+        <br />
+
+        <div class="yellow darken-2 text-center">
+          <p class="display-1 font-weight-bold black--text">
+            <br />VOLUNTEER
+            <br />
+          </p>
+          <span class="black--text">
+            <br />Step into our classrooms and share your knowledge, experience and skills with our children by volunteering to teach and/or
+            <br />assist our volunteers. Help us plan, execute and/or archive our events across the country to further strengthen the movement.
+            <br />
+          </span>
+          <br />
+          <br />
+          <div class="text-center">
+            <v-btn class="ma-2" outlined color="black" disabled>Mumbai</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Bengaluru</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Delhi</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Pune</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Hyderabad</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Kolkata</v-btn>
+            <v-btn class="ma-2" outlined color="black" disabled>Chennai</v-btn>
+          </div>
+          <br />
+          <div id="joinnow">
+            <v-btn to="/register" class="text-center" outlined color="black">Join Now</v-btn>
+          </div>
+          <br />
+          <br />
+        </div>
       </v-content>
-      <v-footer color="yellow darken-1" app>
-        <span class="white--text">&copy; Benifer (Webmasters-2019)</span>
+      <v-footer color="black" app>
+        <span class="yellow--text">&copy; (Webmasters-2019)</span>
         <v-toolbar-items class="justify-center">
-          <v-btn to="faqs" class="white--text" text>FAQs</v-btn>
-          <v-btn to="/privacypolicy" class="white--text" text>Privacy Policy</v-btn>
-          <v-btn to="/contact" class="white--text" text>Contact us</v-btn>
+          <v-btn color="yellow" to="faqs" class="white--text" text>FAQs</v-btn>
+          <v-btn color="yellow" to="/privacypolicy" class="white--text" text>Privacy Policy</v-btn>
+          <v-btn color="yellow" to="/contact" class="white--text" text>Contact us</v-btn>
         </v-toolbar-items>
         <template>
           <div class="flex-grow-1"></div>
-          <v-btn icon src="https://www.facebook.com/benita.rego">
-            <v-icon>mdi-facebook</v-icon>
+          <v-btn color="yellow" icon>
+            <a href="https://www.facebook.com" color="yellow">
+              <v-icon>mdi-facebook</v-icon>
+            </a>
           </v-btn>
-          <v-btn icon src="https://www.instagram.com/benitarego">
-            <v-icon>mdi-instagram</v-icon>
+          <v-btn color="yellow" icon>
+            <a href="https://www.instagram.com">
+              <v-icon>mdi-instagram</v-icon>
+            </a>
           </v-btn>
-          <v-btn icon src="https://www.facebook.com/benita.rego">
-            <v-icon>mdi-twitter</v-icon>
+          <v-btn color="yellow" icon>
+            <a href="https://www.twitter.com">
+              <v-icon>mdi-twitter</v-icon>
+            </a>
           </v-btn>
-          <v-btn icon>
-            <v-icon>mdi-linkedin</v-icon>
+          <v-btn color="yellow" icon>
+            <a href="https://www.linkedin.com">
+              <v-icon>mdi-linkedin</v-icon>
+            </a>
           </v-btn>
-          <v-btn icon src>
-            <v-icon>mdi-youtube</v-icon>
+          <v-btn color="yellow" icon>
+            <a href="https://www.youtube.com">
+              <v-icon>mdi-youtube</v-icon>
+            </a>
           </v-btn>
         </template>
       </v-footer>
@@ -95,11 +147,34 @@
 export default {
   data() {
     return {
-      colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
-      model: 0,
-      stories: ["Beginnings", "People"]
+      // src: [
+      //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuQq1V1XsTPEARKG_NQ73x_hFzP6-OmUdglfLiW0aWZDMXrPaZew",
+      //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZHPYK2qkFoZzjCwwRH9dRNk966mg7FpeMeChy4O0cbxRUWw1VA",
+      //   "pink darken-2",
+      //   "red lighten-1",
+      //   "deep-purple accent-4"
+      // ],
+      // slides: [
+      //   "Sunshine Foundation",
+      //   "Are you ready for it? Apply now",
+      //   "Volunteer, be a part of our community",
+      //   "Fellow, grab the opportunity",
+      //   "Donate and help the Needy"
+      // ]
     };
   },
   components: {}
 };
 </script>
+
+<style>
+#slide {
+  margin-top: -65px;
+}
+#iconbtn {
+  color: white;
+}
+#joinnow {
+  margin-left: 0px;
+}
+</style>

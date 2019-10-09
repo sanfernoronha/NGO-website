@@ -16,6 +16,8 @@ import Dashboard from "./views/Dashboard.vue";
 import DashboardStaff from "./views/Dashboard_Staff.vue";
 import Edit from "./views/edit_event.vue";
 import firebase from "firebase";
+import Profile from "./components/profile.vue";
+import View_more from "./components/view_more.vue";
 
 Vue.use(Router);
 
@@ -32,6 +34,7 @@ let router = new Router({
       name: "ourstory",
       component: OurStory
     },
+
     {
       path: "/whatwedo",
       name: "whatwedo",
@@ -57,6 +60,16 @@ let router = new Router({
       path: "/contact",
       name: "contact",
       component: Contact
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile
+    },
+    {
+      path: "/viewmore/:EventID",
+      name: "viewMore",
+      component: View_more
     },
     {
       path: "/loginforstaff/",

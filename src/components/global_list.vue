@@ -76,12 +76,7 @@
               </v-row>
             </v-list-item>-->
 
-            <v-btn fab dark x-small color="success" class="mr-9">
-              <v-icon dark>mdi-check-circle</v-icon>
-            </v-btn>
-            <v-btn fab dark x-small color="error" class="mr-9">
-              <v-icon dark>mdi-delete</v-icon>
-            </v-btn>
+            <v-btn small class="ma-2" color="success" @click="viewMore(item.eventID)">View More</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -98,6 +93,14 @@ export default {
       volunteering: [],
       keywords: []
     };
+  },
+  methods: {
+    viewMore(id) {
+      this.$router.push({
+        name: "viewMore",
+        params: { EventID: id }
+      });
+    }
   },
   created() {
     db.collection("events")

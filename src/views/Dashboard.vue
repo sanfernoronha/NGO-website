@@ -40,7 +40,8 @@
 
                       <v-list-item-content>
                         <v-list-item-title>{{name}}</v-list-item-title>
-                        <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+                        <v-list-item-subtitle v-show="isLoggedIn" class="success--text">Logged In</v-list-item-subtitle>
+                        <v-list-item-subtitle v-show="!isLoggedIn" class="error--text">Logged In</v-list-item-subtitle>
                       </v-list-item-content>
                     </v-list-item>
                   </template>
@@ -116,13 +117,23 @@ export default {
       email: "",
       sidebar: [
         { title: "Profile", icon: "mdi-account-badge-horizontal", show: true },
-        { title: "Completed", icon: "mdi-calendar-check-outline", show: false },
-        { title: "On-going", icon: "mdi-calendar-clock", show: false },
+        {
+          title: "My Completed",
+          icon: "mdi-calendar-check-outline",
+          show: false
+        },
+        { title: "My On-going", icon: "mdi-calendar-clock", show: false },
         { title: "All Events", icon: "mdi-calendar-today", show: false }
       ],
       isLoggedIn: false,
       currentUser: false
     };
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.isLoggedIn = true;
+      this.currentUser = firebase.auth().currentUser.email;
+    }
   },
   components: {
     "profile-card": ProfileCard,
