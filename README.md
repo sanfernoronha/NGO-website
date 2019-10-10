@@ -1,4 +1,4 @@
-# ngo-project
+# NGO Manager WebApp 
 
 ## Project setup
 ```
@@ -27,3 +27,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 🔨 Built with VueJS 
