@@ -1,5 +1,5 @@
 <template>
-  <v-app class="grey lighten-3">
+  <v-app class="grey lighten-3 page-wrapper">
     <v-app-bar app color="yellow darken-1" dark>
       <v-btn depressed class="transparent" to="/">
         <v-toolbar-title class="text-uppercase white--text">

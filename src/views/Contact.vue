@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="page-wrapper">
     <v-app id="inspire">
       <v-app-bar app color="black" dark>
         <v-img :src="require('@/assets/sun.png')" height="20px" max-width="50px"></v-img>

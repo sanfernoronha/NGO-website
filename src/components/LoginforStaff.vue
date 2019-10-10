@@ -19,11 +19,17 @@
               :value="alert"
               color="success"
               dark
-              border="top"
-              icon="mdi-home"
+              icon="mdi-check"
               transition="scale-transition"
-            >Logging you in</v-alert>
-            <v-card class="elevation-12">
+            >Logging you in as {{email}}</v-alert>
+            <v-alert
+              :value="alert_fail"
+              color="error"
+              dark
+              icon="mdi-check"
+              transition="scale-transition"
+            >Please check your email and password</v-alert>
+            <v-card class="elevation-12" :loading="loading">
               <v-toolbar color="black">
                 <v-toolbar-title class="white--text">Staff Login</v-toolbar-title>
                 <div class="flex-grow-1"></div>
@@ -93,9 +99,12 @@ export default {
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
-    ]
+    ],
+    loading: false,
+    alert_fail: false
   }),
   created() {
+    this.loading = false;
     db.collection("staff_data")
       .get()
       .then(querySnapshot => {
@@ -107,6 +116,7 @@ export default {
   },
   methods: {
     login: function(e) {
+      this.loading = true;
       var flag = false;
       for (var index = 0; index < this.staff_email.length; index++) {
         if (this.staff_email[index] == this.email) {
@@ -124,13 +134,14 @@ export default {
           .then(
             user => {
               this.alert = true;
+
               this.$router.push({
                 name: "dashboardStaff",
                 params: { staffEmail: this.email }
               });
             },
             err => {
-              alert(err.message);
+              this.alert_fail = true;
             }
           );
         e.preventDefault();

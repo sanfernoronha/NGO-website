@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="page-wrapper">
     <v-app id="inspire">
       <v-app-bar app color="yellow darken-1" dark>
         <v-btn depressed class="transparent" to="/">
