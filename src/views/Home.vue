@@ -2,11 +2,11 @@
   <v-app>
     <v-app id="inspire">
       <v-app-bar app color="black" dark>
-        <v-btn>
+        <v-btn class="transparent">
           <v-img :src="require('@/assets/sun.png')" height="20px" max-width="50px"></v-img>
         </v-btn>
-        <v-btn transparent class="transparent" to="/">
-          <v-toolbar-title class="text-uppercase yellow--text">
+        <v-btn text color="black" normal class="transparent" to="/">
+          <v-toolbar-title class="text-uppercase yellow--text transparent">
             <span class="font-weight-light">Sun</span>
             <span>Shine</span>
           </v-toolbar-title>

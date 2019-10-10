@@ -15,6 +15,14 @@
       <v-container id="admin" class="fill-height" fluid v-if="!submitted">
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
+            <v-alert
+              :value="alert"
+              color="success"
+              dark
+              border="top"
+              icon="mdi-home"
+              transition="scale-transition"
+            >Logging you in</v-alert>
             <v-card class="elevation-12">
               <v-toolbar color="black">
                 <v-toolbar-title class="white--text">Staff Login</v-toolbar-title>
@@ -73,6 +81,7 @@ import firebase from "firebase";
 export default {
   name: "stafflogin",
   data: () => ({
+    alert: false,
     valid: false,
     password: "",
     staff_email: [],
@@ -114,7 +123,7 @@ export default {
           .signInWithEmailAndPassword(this.email, this.password)
           .then(
             user => {
-              alert(`You are logged in as ${user.email}`);
+              this.alert = true;
               this.$router.push({
                 name: "dashboardStaff",
                 params: { staffEmail: this.email }
