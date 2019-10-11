@@ -22,7 +22,7 @@
     <v-container id="dashboard">
       <v-row>
         <v-col cols="12" sm="8" md="4" lg="12">
-          <v-card class="elevation-12" height="auto" min-height="500px">
+          <v-card class="elevation-12" height="auto" min-height="500px" :loading="loading">
             <v-toolbar color="yellow darken-4" dark flat>
               <v-toolbar-title>DASHBOARD</v-toolbar-title>
               <div class="flex-grow-1"></div>
@@ -126,7 +126,8 @@ export default {
         { title: "All Events", icon: "mdi-calendar-today", show: false }
       ],
       isLoggedIn: false,
-      currentUser: false
+      currentUser: false,
+      loading: false
     };
   },
   created() {
@@ -143,6 +144,7 @@ export default {
   },
   methods: {
     logout: function() {
+      this.loading = true;
       firebase
         .auth()
         .signOut()

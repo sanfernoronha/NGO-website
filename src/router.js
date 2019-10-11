@@ -67,7 +67,7 @@ let router = new Router({
       component: Profile
     },
     {
-      path: "/viewmore/:EventID",
+      path: "/viewmore/:volEmail/:EventID",
       name: "viewMore",
       component: View_more
     },

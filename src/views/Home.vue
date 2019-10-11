@@ -41,6 +41,7 @@
 
         <div class="black text-center">
           <p class="display-1 font-weight-bold text-center white--text">
+            <br />
             <br />THE CRISIS
             <br />
           </p>

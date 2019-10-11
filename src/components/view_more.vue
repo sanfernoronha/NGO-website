@@ -56,7 +56,8 @@ export default {
       imgURL: "",
       keywords: [],
       location: "",
-      title: ""
+      title: "",
+      Vol_Emails: []
     };
   },
   created() {
@@ -71,6 +72,7 @@ export default {
             (this.imgURL = doc.data().Image_Url),
             (this.keywords = doc.data().Keywords),
             (this.location = doc.data().Location),
+            (this.Vol_Emails = doc.data().Volunteer_Email),
             (this.title = doc.data().Title);
         });
       });
@@ -81,6 +83,24 @@ export default {
       this.loading = true;
 
       setTimeout(() => (this.loading = false), 2000);
+    },
+    register() {
+      this.Vol_Emails.push(this.$route.params.volEmail);
+      console.log(this.Vol_Emails);
+      db.collection("events")
+        .where("Event_ID", "==", this.$route.params.EventID)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            doc.ref
+              .update({
+                Volunteer_Email: this.Vol_Emails
+              })
+              .then(() => {
+                window.alert("Successful");
+              });
+          });
+        });
     }
   }
 };

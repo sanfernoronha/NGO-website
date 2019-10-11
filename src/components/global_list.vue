@@ -10,33 +10,39 @@
         :key="item.eventID"
         class="mr-5"
       >
-        <v-card
-          class="my-12 mr-12"
-          max-width="374"
-          elevation="200"
-          width="200"
-          color="#385F73"
-          dark
+        <v-skeleton-loader
+          :loading="loading"
+          transition="scale-transition"
+          height="94"
+          type="card-avatar, article, actions"
         >
-          <v-img
-            height="150"
-            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            contain
-          ></v-img>
+          <v-card
+            class="my-12 mr-12"
+            max-width="374"
+            elevation="200"
+            width="200"
+            color="#385F73"
+            dark
+          >
+            <v-img
+              height="150"
+              src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              contain
+            ></v-img>
 
-          <v-card-title>
-            {{item.title}}
-            <v-row align="center" justify="end"></v-row>
-          </v-card-title>
-          <v-card-text>
-            <v-row align="center">
-              <div class="white--text ml-4">{{item.location}}</div>
-            </v-row>
+            <v-card-title>
+              {{item.title}}
+              <v-row align="center" justify="end"></v-row>
+            </v-card-title>
+            <v-card-text>
+              <v-row align="center">
+                <div class="white--text ml-4">{{item.location}}</div>
+              </v-row>
 
-            <div class="my-4 subtitle-2 white--text">{{item.startDate}}</div>
-          </v-card-text>
+              <div class="my-4 subtitle-2 white--text">{{item.startDate}}</div>
+            </v-card-text>
 
-          <!-- <v-card-text>
+            <!-- <v-card-text>
             <div>
               <p>{{item.description}}</p>
             </div>
@@ -57,11 +63,11 @@
                 </v-col>
               </v-row>
             </div>
-          </v-card-text>-->
-          <!-- <v-divider class="mx-1"></v-divider> -->
+            </v-card-text>-->
+            <!-- <v-divider class="mx-1"></v-divider> -->
 
-          <v-card-actions>
-            <!-- <v-list-item class="grow">
+            <v-card-actions>
+              <!-- <v-list-item class="grow">
               <v-list-item-avatar color="grey darken-3">
                 <v-img
                   class="elevation-6"
@@ -74,11 +80,12 @@
             <router-link v-bind:to="{name: 'list', params: {vol_id: item.vol_id}}"><v-btn rounded color="primary" dark>View</v-btn></router-link>
                 </div>
               </v-row>
-            </v-list-item>-->
+              </v-list-item>-->
 
-            <v-btn small class="ma-2" color="success" @click="viewMore(item.eventID)">View More</v-btn>
-          </v-card-actions>
-        </v-card>
+              <v-btn small class="ma-2" color="success" @click="viewMore(item.eventID)">View More</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-skeleton-loader>
       </v-col>
     </v-row>
   </v-container>
@@ -90,6 +97,7 @@ export default {
   name: "Global",
   data() {
     return {
+      loading: false,
       volunteering: [],
       keywords: []
     };
@@ -98,11 +106,12 @@ export default {
     viewMore(id) {
       this.$router.push({
         name: "viewMore",
-        params: { EventID: id }
+        params: { EventID: id, volEmail: this.$route.params.userEmail }
       });
     }
   },
   created() {
+    this.loading = true;
     db.collection("events")
       .get()
       .then(querySnapshot => {

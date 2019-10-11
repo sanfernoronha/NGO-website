@@ -15,7 +15,7 @@
       <v-container id="admin" class="fill-height" fluid v-if="!submitted">
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
-            <v-card class="elevation-12">
+            <v-card class="elevation-12" :loading="loading">
               <v-toolbar color="black">
                 <v-toolbar-title class="white--text">Volunteer Login</v-toolbar-title>
                 <div class="flex-grow-1"></div>
@@ -84,7 +84,8 @@ export default {
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
-    ]
+    ],
+    loading: false
   }),
   created() {
     db.collection("volunteers_data")
@@ -98,6 +99,7 @@ export default {
   },
   methods: {
     login: function(e) {
+      this.loading = true;
       let flag = false;
       for (var index = 0; index < this.volunteers_email.length; index++) {
         if (this.volunteers_email[index] == this.email) {
