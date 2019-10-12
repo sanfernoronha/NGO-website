@@ -76,11 +76,26 @@
               </v-row>
             </v-list-item>-->
 
-            <v-btn fab dark x-small color="teal" class="mr-9" @click="pushToEdit(item.eventID)">
+            <v-btn
+              fab
+              dark
+              x-small
+              color="teal"
+              class="mr-9"
+              @click="pushToEdit(item.eventID,item.completed)"
+            >
               <v-icon dark>mdi-format-paint</v-icon>
             </v-btn>
 
-            <v-btn fab dark x-small color="success" class="mr-9">
+            <v-btn
+              fab
+              dark
+              x-small
+              color="success"
+              class="mr-9"
+              @click="pushToComplete(item.eventID)"
+              :disabled="item.completed"
+            >
               <v-icon dark>mdi-check-circle</v-icon>
             </v-btn>
             <v-btn fab dark x-small color="error" class="mr-9">
@@ -109,6 +124,26 @@ export default {
         name: "Edit",
         params: { eventID: id }
       });
+    },
+    pushToComplete(id, completed) {
+      db.collection("events")
+        .where("Event_ID", "==", id)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            doc.ref
+              .update({
+                Completed: true
+              })
+              .then(() => {
+                console.log("Event marked as completed!");
+                this.$router.push({
+                  name: "dashboardStaff",
+                  params: { staffEmail: this.$route.params.staffEmail }
+                });
+              });
+          });
+        });
     }
   },
   computed: {},
@@ -126,7 +161,8 @@ export default {
             keywords: doc.data().Keywords,
             location: doc.data().Location,
             startDate: doc.data().Start_Date,
-            title: doc.data().Title
+            title: doc.data().Title,
+            completed: doc.data().Completed
           };
           this.volunteering.push(data);
         });

@@ -153,7 +153,9 @@ export default {
       description: "",
       chips: [],
       items: ["Clean-up", "Donation"],
-      staff_email: this.$route.params.staffEmail
+      staff_email: this.$route.params.staffEmail,
+      Volunteer_Email: [],
+      completed: false
     };
   },
   computed: {
@@ -184,7 +186,9 @@ export default {
           Location: this.location,
           Staff_Email: this.staff_email,
           Start_Date: this.start,
-          Title: this.title
+          Title: this.title,
+          Volunteer_Email: this.Volunteer_Email,
+          Completed: this.completed
         })
         .then(docRef => {
           window.alert("Event created: ", docRef.id);
