@@ -142,6 +142,9 @@ export default {
             },
             err => {
               this.alert_fail = true;
+              this.$router.push({
+                name: "loginforstaff"
+              });
             }
           );
         e.preventDefault();

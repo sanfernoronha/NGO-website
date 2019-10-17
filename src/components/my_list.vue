@@ -115,7 +115,8 @@ export default {
   data() {
     return {
       volunteering: [],
-      keywords: []
+      keywords: [],
+      dialogue: false
     };
   },
   methods: {
