@@ -1,6 +1,9 @@
 <p align="center">
 <img src="https://i.imgur.com/ki0rbrX.png">
 </p>
+<p align="center">
+<img src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png">
+</p>
 
 
 # NGO Manager WebApp 
