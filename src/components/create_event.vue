@@ -110,8 +110,10 @@
                   </v-chip>
                 </template>
               </v-combobox>
-
-              <v-btn class="primary mb-5 mt-5" :disabled="!formIsValid" type="submit">CREATE</v-btn>
+              <div class="text-center">
+                <v-snackbar top="top" v-model="snackbar" color="yellow--text">{{ text }}</v-snackbar>
+                <v-btn class="primary mb-5 mt-5" :disabled="!formIsValid" type="submit">CREATE</v-btn>
+              </div>
             </v-form>
           </v-card-text>
         </v-card>
@@ -155,7 +157,9 @@ export default {
       items: ["Clean-up", "Donation"],
       staff_email: this.$route.params.staffEmail,
       Volunteer_Email: [],
-      completed: false
+      completed: false,
+      snackbar: false,
+      text: "Event Created"
     };
   },
   computed: {

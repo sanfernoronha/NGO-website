@@ -81,26 +81,36 @@
               dark
               x-small
               color="teal"
-              class="mr-9"
+              class="mr-10"
               @click="pushToEdit(item.eventID,item.completed)"
             >
               <v-icon dark>mdi-format-paint</v-icon>
             </v-btn>
 
-            <v-btn
-              fab
-              dark
-              x-small
-              color="success"
-              class="mr-9"
-              @click="pushToComplete(item.eventID)"
-              :disabled="item.completed"
-            >
-              <v-icon dark>mdi-check-circle</v-icon>
-            </v-btn>
-            <v-btn fab dark x-small color="error" class="mr-9">
-              <v-icon dark>mdi-delete</v-icon>
-            </v-btn>
+            <div class="text-center">
+              <v-btn
+                fab
+                dark
+                x-small
+                color="success"
+                class="mr-10 ml-1"
+                @click="pushToComplete(item.eventID)"
+                :disabled="item.completed"
+              >
+                <v-icon dark>mdi-check-circle</v-icon>
+              </v-btn>
+              <v-snackbar
+                top="top"
+                v-model="snackbar_complete"
+                color="yellow--text"
+              >{{ text_complete }}</v-snackbar>
+            </div>
+            <div class="text-center">
+              <v-btn fab dark x-small color="error" class="mr-9" @click="deleteEvent(item.eventID)">
+                <v-icon dark>mdi-delete</v-icon>
+              </v-btn>
+              <v-snackbar top="top" v-model="snackbar_delete" color="yellow--text">{{ text_delete }}</v-snackbar>
+            </div>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -116,7 +126,11 @@ export default {
     return {
       volunteering: [],
       keywords: [],
-      dialogue: false
+      dialogue: false,
+      snackbar_complete: false,
+      text_complete: "Completing your event",
+      snackbar_delete: false,
+      text_delete: "Deleting Event"
     };
   },
   methods: {
@@ -127,24 +141,37 @@ export default {
       });
     },
     pushToComplete(id, completed) {
-      db.collection("events")
-        .where("Event_ID", "==", id)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            doc.ref
-              .update({
-                Completed: true
-              })
-              .then(() => {
-                console.log("Event marked as completed!");
-                this.$router.push({
-                  name: "dashboardStaff",
-                  params: { staffEmail: this.$route.params.staffEmail }
+      if (confirm("Are you sure you want to mark this event as complete ?")) {
+        this.snackbar_complete = true;
+        db.collection("events")
+          .where("Event_ID", "==", id)
+          .get()
+          .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              doc.ref
+                .update({
+                  Completed: true
+                })
+                .then(() => {
+                  this.$router.go();
                 });
-              });
+            });
           });
-        });
+      }
+    },
+    deleteEvent(id) {
+      if (confirm("Are you sure you want to delete this event?")) {
+        this.snackbar_delete = true;
+        db.collection("events")
+          .where("Event_ID", "==", id)
+          .get()
+          .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              doc.ref.delete();
+              this.$router.go();
+            });
+          });
+      }
     }
   },
   computed: {},

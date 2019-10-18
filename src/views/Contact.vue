@@ -215,7 +215,7 @@ export default {
   width: 400px;
 }
 #details1 {
-  margin-left: 900px;
+  margin-left: 1000px;
   margin-top: -200px;
   width: 400px;
 }
@@ -225,7 +225,7 @@ export default {
   width: 400px;
 }
 #details3 {
-  margin-left: 900px;
+  margin-left: 1000px;
   margin-top: -200px;
   width: 400px;
 }
@@ -235,7 +235,7 @@ export default {
   width: 400px;
 }
 #details5 {
-  margin-left: 900px;
+  margin-left: 1000px;
   margin-top: -250px;
   width: 400px;
 }

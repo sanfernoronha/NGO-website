@@ -67,7 +67,7 @@
         <br />
         <br />
 
-        <div>
+        <!-- <div>
           <v-img
             src="@/assets/pic.jpg"
             aspect-ratio="1"
@@ -90,10 +90,10 @@
                 <br />building a wider movement for educational equity in the country.
               </p>
               <br />
-              <v-btn class="text-center" outlined color="white">Learn about the Volunteering</v-btn>-->
+              <v-btn class="text-center" outlined color="white">Learn about the Volunteering</v-btn>
             </v-col>
           </v-img>
-        </div>
+        </div>-->
 
         <div class="text-center">
           <p id="jointhemove" class="display-1">Join the Movement</p>
