@@ -1,7 +1,7 @@
 <p align="center">
 <img src="https://i.imgur.com/ki0rbrX.png">
 </p>
-<p align="center" style="font-size: 50px"><b>Vuetify</b></p>
+<header align="center"><b>Vuetify</b></header>
 <p align="center">
 <img src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png">
 </p>
