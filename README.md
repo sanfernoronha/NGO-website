@@ -1,3 +1,6 @@
+<p align="center">
+<img src="https://i.imgur.com/ki0rbrX.png">
+</p>
 # NGO Manager WebApp 
 
 ## Project setup
