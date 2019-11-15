@@ -195,12 +195,9 @@ export default {
           Completed: this.completed
         })
         .then(docRef => {
-          window.alert("Event created: ", docRef.id);
-          this.$router.push({
-            name: "dashboardStaff",
-            params: { staffEmail: this.staff_email }
-          });
+          this.snackbar = true;
           this.$refs.form_create.reset();
+          this.$router.go();
         })
         .catch(error => {
           console.error("Error adding event ", error);
